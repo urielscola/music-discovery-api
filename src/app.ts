@@ -14,6 +14,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 })
 
 app.use((err: Errback, req: Request, res: Response, next: NextFunction) => {
+  console.log(err)
   return res.status(500).json({ message: 'Internal Error' })
 })
 

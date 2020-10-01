@@ -5,7 +5,13 @@ import {
   Logger as IstanceInterface,
 } from 'winston'
 
-class Logger {
+export interface LoggerInterface {
+  info: (message: String) => IstanceInterface
+  error: (message: String) => IstanceInterface
+  warn: (message: String) => IstanceInterface
+}
+
+class Logger implements LoggerInterface {
   private instance: IstanceInterface
 
   constructor() {
@@ -34,15 +40,15 @@ class Logger {
   }
 
   info(message: String) {
-    this.instance.log('info', message)
+    return this.instance.log('info', message)
   }
 
   error(message: String) {
-    this.instance.log('error', message)
+    return this.instance.log('error', message)
   }
 
   warn(message: String) {
-    this.instance.log('warn', message)
+    return this.instance.log('warn', message)
   }
 }
 

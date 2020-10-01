@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "dev": "nodemon src/index.ts",
-    "build": "rimraf ./build && sucrase ./src -d ./dist --transforms typescript,imports",
+    "build": "rimraf ./build && sucrase ./src -d ./build --transforms typescript,imports",
     "lint": "eslint --fix --ext .js,.ts,.json ."
   },
   "repository": {
