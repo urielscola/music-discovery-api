@@ -2,13 +2,7 @@ import { Request } from 'express'
 import httpStatus from 'http-status'
 import { mwErrorHandler } from '../../middlewares'
 import { BadRequestError, Logger } from '../../lib'
-
-const mockResponse = () => {
-  const res: any = {}
-  res.status = jest.fn().mockReturnValue(res)
-  res.json = jest.fn().mockReturnValue(res)
-  return res
-}
+import { mockResponse } from '../utils'
 
 describe('mwErrorHandler', () => {
   test('mwErrorHandler is defined', () => {
