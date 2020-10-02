@@ -7,7 +7,7 @@
     "dev": "nodemon src/index.ts",
     "build": "rimraf ./build && sucrase ./src -d ./build --transforms typescript,imports",
     "lint": "eslint --fix --ext .js,.ts,.json .",
-    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test": "jest --passWithNoTests --noStackTrace --runInBand",
     "test:ci": "npm test -- --coverage"
   },
   "repository": {
@@ -28,6 +28,7 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "helmet": "^4.1.1",
+    "http-status": "^1.4.2",
     "typescript": "^4.0.3",
     "winston": "^3.3.3"
   },
