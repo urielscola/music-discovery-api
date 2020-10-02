@@ -1,7 +1,7 @@
 module.exports = {
   clearMocks: true,
   collectCoverage: true,
-  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+  collectCoverageFrom: ['<rootDir>/src/(lib|middlewares)/**/*.ts'],
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   coverageReporters: ['text-summary', 'lcov'],

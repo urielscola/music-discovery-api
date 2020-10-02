@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import mwLogger from '../../middlewares/mwLogger'
+import { mwLogger } from '../../middlewares'
 import { Logger } from '../../lib'
 
 describe('mwLogger', () => {
