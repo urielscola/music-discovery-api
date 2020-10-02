@@ -7,7 +7,6 @@ const mwAuthentication = (req: Request, res: Response, next: NextFunction) => {
     throw new AuthenticationError('No authorization provided.')
 
   const [bearer, jwt] = authorization.split(/\s/)
-  console.log({ bearer, jwt })
   if (!bearer || !jwt) throw new AuthenticationError('Token not provided.')
 
   try {

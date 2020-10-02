@@ -1,6 +1,9 @@
 import axios from 'axios'
 import querystring from 'querystring'
 
+const SPOTIFY_API_URL = 'https://api.spotify.com/v1'
+const SPOTIFY_AUTH_URL = 'https://accounts.spotify.com/api'
+
 class SpotifyService {
   static async getToken(code: string) {
     const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } = process.env
@@ -21,7 +24,7 @@ class SpotifyService {
     }
 
     const { data } = await axios.post(
-      'https://accounts.spotify.com/api/token',
+      `${SPOTIFY_AUTH_URL}/token`,
       querystring.stringify(body),
       { headers }
     )
@@ -31,7 +34,31 @@ class SpotifyService {
 
   static async getUser(accessToken: string) {
     const { data } = await axios({
-      url: 'https://api.spotify.com/v1/me',
+      url: `${SPOTIFY_API_URL}/me`,
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+
+    return data
+  }
+
+  static async getUserTopTracks(accessToken: string) {
+    const { data } = await axios({
+      url: `${SPOTIFY_API_URL}/me/top/tracks`,
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+
+    return data
+  }
+
+  static async getUserTopArtists(accessToken: string) {
+    const { data } = await axios({
+      url: `${SPOTIFY_API_URL}/me/top/artists`,
       method: 'GET',
       headers: {
         Authorization: `Bearer ${accessToken}`,
