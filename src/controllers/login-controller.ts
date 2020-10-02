@@ -4,10 +4,16 @@ import { generateRandomString } from '../utils'
 class LoginController {
   spotifyService
   queryStringService
+  jsonwebtokenService
 
-  constructor(spotifyService: any, queryStringService: any) {
+  constructor(
+    spotifyService: any,
+    queryStringService: any,
+    jsonwebtokenService: any
+  ) {
     this.spotifyService = spotifyService
     this.queryStringService = queryStringService
+    this.jsonwebtokenService = jsonwebtokenService
   }
 
   login(req: Request, res: Response) {
@@ -27,12 +33,17 @@ class LoginController {
 
   async loginCallback(req: Request, res: Response) {
     const { code } = req.query
+    const { CLIENT_URL } = process.env
     const { access_token, refresh_token } = await this.spotifyService.getToken(
       code as string
     )
-    const jwt = { access_token, refresh_token }
+
+    const jwt = this.jsonwebtokenService.sign(access_token, refresh_token)
+
     return res.redirect(
-      `${process.env.CLIENT_URL}#${this.queryStringService.stringify(jwt)}`
+      `${CLIENT_URL}?${this.queryStringService.stringify({
+        token: jwt,
+      })}`
     )
   }
 }

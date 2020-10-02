@@ -10,6 +10,7 @@ export const mockRequest = (params = {}) => {
   const req: any = {
     query: {},
     params: {},
+    headers: {},
     body: {},
     ...params,
   }

@@ -4,7 +4,7 @@ import { mockResponse, mockRequest } from '../utils'
 
 describe('LoginController', () => {
   test('LoginController is defined', () => {
-    const controller = new LoginController({}, {})
+    const controller = new LoginController({}, {}, {})
     expect(controller).toBeInstanceOf(LoginController)
   })
 
@@ -18,9 +18,12 @@ describe('LoginController', () => {
       }),
     }
     const stringifyServiceMock = { stringify: jest.fn() }
+    const jsonwebtokenMock = { sign: jest.fn().mockReturnValue('token') }
+
     const controller = new LoginController(
       spotifyServiceMock,
-      stringifyServiceMock
+      stringifyServiceMock,
+      jsonwebtokenMock
     )
 
     controller.loginCallback(req as Request, res as Response)
@@ -30,7 +33,7 @@ describe('LoginController', () => {
   test('LoginController login() method', () => {
     const res = mockResponse()
     const stringifyServiceMock = { stringify: jest.fn() }
-    const controller = new LoginController({}, stringifyServiceMock)
+    const controller = new LoginController({}, stringifyServiceMock, {})
 
     controller.login({} as Request, res as Response)
     expect(res.redirect).toBeCalledTimes(1)
