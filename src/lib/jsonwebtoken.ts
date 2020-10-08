@@ -6,7 +6,7 @@ class Jsonwebtoken {
       {
         accessToken,
         refreshToken,
-        iat: Math.floor(Date.now()),
+        iat: Math.floor(Date.now()) / 1000,
       },
       'shhh',
       { expiresIn: '1h' }

@@ -32,16 +32,19 @@ class LoginController {
   }
 
   async loginCallback(req: Request, res: Response) {
-    const { code } = req.query
+    const { code, state, error } = req.query
     const { CLIENT_URL } = process.env
+    if (error === 'access_denied' || state === null) {
+      return res.redirect(`${CLIENT_URL}/login?error=true`)
+    }
+
     const { access_token, refresh_token } = await this.spotifyService.getToken(
       code as string
     )
-
     const jwt = this.jsonwebtokenService.sign(access_token, refresh_token)
 
     return res.redirect(
-      `${CLIENT_URL}?${this.queryStringService.stringify({
+      `${CLIENT_URL}/login?${this.queryStringService.stringify({
         token: jwt,
       })}`
     )
