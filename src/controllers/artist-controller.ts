@@ -36,6 +36,16 @@ class ArtistController {
 
     return res.status(200).json({ success: true, data })
   }
+
+  async getArtistsAlbums(req: Request, res: Response) {
+    const { id } = req.params
+    const {
+      token: { accessToken },
+    } = req
+    const data = await this.spotifyService.getArtistAlbums(accessToken, id)
+
+    return res.status(200).json({ success: true, data })
+  }
 }
 
 export default ArtistController
