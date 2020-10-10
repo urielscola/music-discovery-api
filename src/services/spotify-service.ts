@@ -51,6 +51,9 @@ class SpotifyService {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
+      params: {
+        limit: 12
+      }
     })
 
     return data
@@ -63,6 +66,9 @@ class SpotifyService {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
+      params: {
+        limit: 12
+      }
     })
 
     return data
@@ -104,6 +110,7 @@ class SpotifyService {
         Authorization: `Bearer ${accessToken}`,
       },
       params: {
+        limit: 12,
         country: 'BR',
       },
     })
@@ -133,7 +140,7 @@ class SpotifyService {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${accessToken}`,
-      },
+      }
     })
 
     return data
@@ -196,6 +203,36 @@ class SpotifyService {
         seed_genres: seedGenres,
         seed_tracks: seedTracks,
         market: 'BR',
+      },
+    })
+
+    return data
+  }
+
+  static async createPlaylist(accessToken: string, id: string, name: string) {
+    const { data } = await axios({
+      url: `${SPOTIFY_API_URL}/users/${id}/playlists`,
+      method: 'POST',
+      data: {
+        name
+      },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+
+    return data
+  }
+
+  static async addToPlaylist(accessToken: string, id: string, tracks: [string]) {
+    const { data } = await axios({
+      url: `${SPOTIFY_API_URL}/playlists/${id}/tracks`,
+      method: 'POST',
+      data: {
+        uris: tracks
+      },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
       },
     })
 
