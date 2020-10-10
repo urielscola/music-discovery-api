@@ -8,7 +8,8 @@
     "build": "cross-env NODE_ENV=production && rimraf ./build && sucrase ./src -d ./build --transforms typescript,imports",
     "lint": "eslint --fix --ext .js,.ts,.json .",
     "test": "jest --passWithNoTests --noStackTrace --runInBand",
-    "test:ci": "npm test -- --coverage"
+    "test:ci": "npm test -- --coverage",
+    "start": "pm2-runtime start ecosystem.config.js --env production"
   },
   "repository": {
     "type": "git",
